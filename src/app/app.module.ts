@@ -1,19 +1,34 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { Camera } from '@ionic-native/camera';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule, Storage } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ErrorHandler, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Camera} from '@ionic-native/camera';
+import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar';
+import {IonicStorageModule, Storage} from '@ionic/storage';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
-import { Settings } from '../providers/providers';
-import { User } from '../providers/providers';
-import { Api } from '../providers/providers';
-import { MyApp } from './app.component';
+import {Items} from '../mocks/providers/items';
+import {Settings} from '../providers/providers';
+import {User} from '../providers/providers';
+import {Api} from '../providers/providers';
+import {MyApp} from './app.component';
+
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {Facebook} from "@ionic-native/facebook";
+import {AngularFirestore} from "angularfire2/firestore";
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyABUgtvcgM7My8m6MeIfFrigHuUkiZZiVQ",
+  authDomain: "test-2d107.firebaseapp.com",
+  databaseURL: "https://test-2d107.firebaseio.com",
+  projectId: "test-2d107",
+  storageBucket: "test-2d107.appspot.com",
+  messagingSenderId: "830297659502"
+};
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -51,7 +66,10 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -64,9 +82,12 @@ export function provideSettings(storage: Storage) {
     Camera,
     SplashScreen,
     StatusBar,
-    { provide: Settings, useFactory: provideSettings, deps: [Storage] },
+    {provide: Settings, useFactory: provideSettings, deps: [Storage]},
     // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Facebook,
+    AngularFirestore
   ]
 })
-export class AppModule { }
+export class AppModule {
+}

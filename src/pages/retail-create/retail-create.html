@@ -1,0 +1,51 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Создать позицию</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="form" (ngSubmit)="retailForm()">
+
+    <ion-list>
+
+      <ion-item>
+        <ion-label stacked>Описание товара</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Розница</ion-label>
+        <ion-input type="number" formControlName="retail"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Опт</ion-label>
+        <ion-input type="number" formControlName="wholesale"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Доплата</ion-label>
+        <ion-input value="50" type="number" formControlName="surcharge"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Время</ion-label>
+        <ion-datetime
+          displayFormat="YYYY/MM/DD"
+          pickerFormat="YYYY MMMM DD"
+          formControlName="time"
+          doneText="Готово"
+          cancelText="Отмена"
+          monthNames="Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
+    <button ion-button block type="submit" [disabled]="!form.valid">Создать</button>
+
+  </form>
+</ion-content>

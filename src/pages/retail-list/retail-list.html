@@ -12,7 +12,26 @@
 </ion-header>
 
 <ion-content padding>
-  <li *ngFor="let item of retails | async">
-    {{ item.description }}
-  </li>
+
+  <ion-list>
+    <ion-item>Позиций: {{this.countItems}}</ion-item>
+
+    <ion-item-sliding *ngFor="let item of retails | async">
+      <button ion-item>
+        <h2>{{item.description}}</h2>
+        <p>Розница: {{item.retail}}, Опт: {{item.wholesale}}, Доплата: {{item.surcharge}}</p>
+        <p ion-text color="secondary">Доход: {{item.retail - item.wholesale -item.surcharge}}</p>
+        <ion-note item-end style="font-size: 12px;">{{item.time}}</ion-note>
+      </button>
+      <ion-item-options>
+        <button ion-button color="secondary" style="font-size: 10px;" (click)="updateItem(item.$key)">
+          Обновить
+        </button>
+        <button ion-button color="danger" style="font-size: 10px;" (click)="deleteItem(item.$key)">
+          Удалить
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>

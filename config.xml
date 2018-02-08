@@ -85,9 +85,9 @@
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-    <engine name="android" spec="7.0.0" />
     <plugin name="cordova-plugin-facebook4" spec="https://github.com/amritk/cordova-plugin-facebook4">
         <variable name="APP_ID" value="1400731923366229" />
         <variable name="APP_NAME" value="fs-counting" />
     </plugin>
+    <engine name="android" spec="7.0.0" />
 </widget>

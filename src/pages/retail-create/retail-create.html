@@ -45,7 +45,8 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button block type="submit" [disabled]="!form.valid">Создать</button>
+    <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'create'">Создать</button>
+    <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'update'">Обновить</button>
 
   </form>
 </ion-content>

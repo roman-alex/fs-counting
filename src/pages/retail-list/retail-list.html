@@ -11,17 +11,76 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <ion-list>
-    <ion-item>Позиций: {{this.countItems}}</ion-item>
+
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>от</ion-label>
+            <ion-datetime
+              max="{{this.toDate}}"
+              [(ngModel)]="this.fromDate"
+              displayFormat="YYYY/MM/DD"
+              pickerFormat="YYYY MMMM DD"
+              doneText="Готово"
+              cancelText="Отмена"
+              monthNames="Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>до</ion-label>
+            <ion-datetime
+              min="{{this.fromDate}}"
+              [(ngModel)]="this.toDate"
+              displayFormat="YYYY/MM/DD"
+              pickerFormat="YYYY MMMM DD"
+              doneText="Готово"
+              cancelText="Отмена"
+              monthNames="Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item no-lines>
+      <button ion-button block (click)="searchByDate()">Поиск по отрезку времени</button>
+    </ion-item>
+
+    <ion-item>
+      <div>Позиций: {{this.countItems}}</div>
+      <p>Розница: {{this.retail}}, Опт: {{this.wholesale}}, Доплата: {{this.surcharge}}</p>
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col>
+            <p ion-text color="danger">Опт + Доплата: {{(this.wholesale + this.surcharge) || 0}} </p>
+          </ion-col>
+          <ion-col>
+            <p ion-text text-right color="secondary">Доход: {{this.income || 0}} </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <h2 ion-text text-center>Результат</h2>
 
     <ion-item-sliding *ngFor="let item of retails | async">
       <button ion-item>
         <h2>{{item.description}}</h2>
         <p>Розница: {{item.retail}}, Опт: {{item.wholesale}}, Доплата: {{item.surcharge}}</p>
-        <p ion-text color="secondary">Доход: {{item.retail - item.wholesale -item.surcharge}}</p>
-        <ion-note item-end style="font-size: 12px;">{{item.time}}</ion-note>
+        <ion-grid no-padding>
+          <ion-row>
+            <ion-col>
+              <p ion-text color="secondary">Доход: {{item.retail - item.wholesale -item.surcharge}} </p>
+            </ion-col>
+            <ion-col text-right>
+              <ion-note style="font-size: 12px;">{{item.time}}</ion-note>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </button>
       <ion-item-options>
         <button ion-button color="secondary" style="font-size: 10px;" (click)="updateItem(item.$key)">

@@ -1,13 +1,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Создать позицию</ion-title>
+    <ion-title>{{ this.navParams.data.type === 'create' ? 'Создать' : 'Обновить'}} позицию</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
   <form [formGroup]="form" (ngSubmit)="retailForm()">
 
@@ -45,8 +45,10 @@
       </ion-item>
     </ion-list>
 
-    <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'create'">Создать</button>
-    <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'update'">Обновить</button>
+    <div padding>
+      <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'create'">Создать</button>
+      <button ion-button block type="submit" [disabled]="!form.valid" *ngIf="this.navParams.data.type === 'update'">Обновить</button>
+    </div>
 
   </form>
 </ion-content>

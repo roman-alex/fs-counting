@@ -11,8 +11,12 @@ import * as firebase from "firebase/app";
 @Component({
   template: `<ion-menu [content]="content">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
+      <ion-toolbar color="primary">
+        <div class="header-menu">
+          <h3></h3>
+          <img class="header-menu__logo" src="{{this.user?.photoURL}}" alt="">
+          <h3 class="header-menu__text">{{this.user?.displayName}}</h3>
+        </div>
       </ion-toolbar>
     </ion-header>
 
@@ -20,6 +24,10 @@ import * as firebase from "firebase/app";
       <ion-list>
         <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
           {{p.title}}
+        </button>
+        <button menuClose ion-item (click)="signOut()">
+          <ion-icon color="primary" name="exit" item-start></ion-icon>
+          Выход
         </button>
       </ion-list>
     </ion-content>
@@ -29,21 +37,22 @@ import * as firebase from "firebase/app";
 })
 export class MyApp {
   rootPage: any;
+  user: firebase.User;
 
   @ViewChild(Nav) nav: Nav;
 
   pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }
+    // { title: 'Tutorial', component: 'TutorialPage' },
+    // { title: 'Welcome', component: 'WelcomePage' },
+    // { title: 'Tabs', component: 'TabsPage' },
+    // { title: 'Cards', component: 'CardsPage' },
+    // { title: 'Content', component: 'ContentPage' },
+    // { title: 'Login', component: 'LoginPage' },
+    // { title: 'Signup', component: 'SignupPage' },
+    // { title: 'Master Detail', component: 'ListMasterPage' },
+    // { title: 'Menu', component: 'MenuPage' },
+    // { title: 'Settings', component: 'SettingsPage' },
+    // { title: 'Search', component: 'SearchPage' }
   ]
 
   constructor(platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,  private afAuth: AngularFireAuth) {
@@ -58,11 +67,17 @@ export class MyApp {
       if (!user) {
         this.rootPage = FirstRunPage;
       } else {
+        this.user = user;
+        console.log(user);
         this.rootPage = MainPage;
       }
     });
 
     this.config.set('ios', 'backButtonText', 'назад');
+  }
+
+  signOut() {
+    this.afAuth.auth.signOut();
   }
 
   openPage(page) {

@@ -13,8 +13,6 @@ import * as firebase from "firebase/app";
   templateUrl: 'retail-create.html',
 })
 export class RetailCreatePage {
-
-  // getTime = new Date().getTime();
   timeNow: any;
   private retailCollection: AngularFirestoreCollection<Retail>;
   private form : FormGroup;
@@ -71,13 +69,17 @@ export class RetailCreatePage {
 
   retailForm(){
     if(this.navParams.data.type === 'create') {
-      this.retailCollection.add(this.form.value);
-      let toast = this.toastCtrl.create({
-        message: 'Позиция создана',
-        duration: 2000,
-        position: 'top'
+      this.retailCollection.add(this.form.value).then(res => {
+        let toast = this.toastCtrl.create({
+          message: 'Позиция создана. Можете создать еще.',
+          duration: 2000,
+          position: 'top'
+        });
+        toast.present();
+        this.form.controls.description.reset();
+        this.form.controls.retail.reset();
+        this.form.controls.wholesale.reset();
       });
-      toast.present();
     } else if(this.navParams.data.type === 'update') {
       this.retailCollection.doc(this.navParams.data.key).update(this.form.value);
       let toast = this.toastCtrl.create({

@@ -11,8 +11,8 @@ import { Tab3Root } from '../pages';
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root: any = Tab2Root;
-  tab2Root: any = Tab1Root;
+  tab1Root: any = Tab1Root;
+  tab2Root: any = Tab2Root;
   tab3Root: any = Tab3Root;
 
   tab1Title = " ";
@@ -21,7 +21,7 @@ export class TabsPage {
 
   constructor(public navCtrl: NavController) {
     this.tab1Title = 'Розница';
-    this.tab2Title = 'Пустая';
-    this.tab3Title = 'пустая2';
+    this.tab2Title = 'Опт';
+    this.tab3Title = 'Расходы';
   }
 }

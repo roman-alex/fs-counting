@@ -32,6 +32,7 @@ export class RetailListPage {
       if (user) {
         this.fromDate = this.tomonth();
         this.toDate = this.today();
+        this.retailCollection = this.afs.doc<any>(`users/${user.uid}`).collection<Retail>(`retails`);
         this.getRetails(user.uid);
       }
     });
@@ -59,7 +60,11 @@ export class RetailListPage {
       this.dateFilter$
     ).switchMap(() =>
       this.afs.doc<any>(`users/${uid}`).collection<Retail>('retails', ref => {
-        return ref.where('time', '<=', this.toDate).where('time', '>=', this.fromDate).orderBy('time', 'desc');
+        if(this.toDate === this.fromDate) {
+          return ref.where('time', '==', this.fromDate);
+        } else {
+          return ref.where('time', '<=', this.toDate).where('time', '>=', this.fromDate).orderBy('time', 'desc');
+        }
       }).snapshotChanges().map(actions => {
         this.countItems = actions.length;
         this.income = 0;

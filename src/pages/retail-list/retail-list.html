@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Розница</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="createItem()">
@@ -56,10 +56,10 @@
       <ion-grid no-padding>
         <ion-row>
           <ion-col>
-            <p ion-text color="danger">Опт + Доплата: {{(this.wholesale + this.surcharge) || 0}} </p>
+            <p ion-text color="danger" style="font-weight: bold;">Опт + Доплата: {{(this.wholesale + this.surcharge) || 0}} </p>
           </ion-col>
           <ion-col>
-            <p ion-text text-right color="secondary">Доход: {{this.income || 0}} </p>
+            <p ion-text text-right color="secondary" style="font-weight: bold;">Доход: {{this.income || 0}} </p>
           </ion-col>
         </ion-row>
       </ion-grid>

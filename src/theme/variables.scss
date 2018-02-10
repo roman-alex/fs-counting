@@ -3,7 +3,8 @@
 $font-path: "../assets/fonts";
 
 @import "ionic.globals";
-
+//@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic');
 
 // Shared Variables
 // --------------------------------------------------
@@ -12,8 +13,12 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-$text-color:        #000;
-$background-color:  #fff;
+$text-color:        #212121;
+//$background-color:  #CFD8DC;
+
+$font-family-md-base: "Roboto";
+$font-family-ios-base: "Roboto";
+$font-family-wp-base: "Roboto";
 
 
 // Named Color Variables
@@ -25,8 +30,8 @@ $background-color:  #fff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #512DA8,
-  secondary:  #4CAF50,
+  primary:    #455A64,
+  secondary:  #009688,
   danger:     #C2185B,
   light:      #D1C4E9,
   dark:       #212121

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {IonicPage, MenuController, NavController} from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -16,7 +16,7 @@ export class WelcomePage {
 
   displayName;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private fb: Facebook, private platform: Platform) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private fb: Facebook, private platform: Platform, public menu: MenuController) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (!user) {
         this.displayName = null;
@@ -40,11 +40,11 @@ export class WelcomePage {
     }
   }
 
-  // signOut() {
-  //   this.afAuth.auth.signOut();
-  // }
+  ionViewDidEnter() {
+    this.menu.enable(false);
+  }
 
-  // signup() {
-  //   this.navCtrl.push('SignupPage');
-  // }
+  ionViewWillLeave() {
+    this.menu.enable(true);
+  }
 }

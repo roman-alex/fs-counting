@@ -40,11 +40,11 @@ export class WelcomePage {
     }
   }
 
-  ionViewDidEnter() {
-    this.menu.enable(false);
-  }
-
-  ionViewWillLeave() {
-    this.menu.enable(true);
-  }
+  // ionViewDidEnter() {
+  //   this.menu.enable(false);
+  // }
+  //
+  // ionViewWillLeave() {
+  //   this.menu.enable(true);
+  // }
 }

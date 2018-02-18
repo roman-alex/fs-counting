@@ -4,7 +4,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Config, Nav, Platform } from 'ionic-angular';
 
 import {FirstRunPage, MainPage} from '../pages/pages';
-import { Settings } from '../providers/providers';
 import {AngularFireAuth} from "angularfire2/auth";
 import * as firebase from "firebase/app";
 
@@ -43,10 +42,10 @@ export class MyApp {
 
   pages: any[] = [
     // { title: 'Welcome', component: 'WelcomePage' },
-    // { title: 'Tabs', component: 'TabsPage' },
+    { title: 'Tabs', component: 'TabsPage' },
   ]
 
-  constructor(platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,  private afAuth: AngularFireAuth) {
+  constructor(platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,  private afAuth: AngularFireAuth) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -59,7 +58,7 @@ export class MyApp {
         this.rootPage = FirstRunPage;
       } else {
         this.user = user;
-        console.log(user);
+        //console.log(user);
         this.rootPage = MainPage;
       }
     });

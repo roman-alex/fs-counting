@@ -42,7 +42,7 @@ export class MyApp {
 
   pages: any[] = [
     // { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
+    // { title: 'Tabs', component: 'TabsPage' },
   ]
 
   constructor(platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen,  private afAuth: AngularFireAuth) {

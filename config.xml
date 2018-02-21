@@ -89,5 +89,8 @@
         <variable name="APP_ID" value="1400731923366229" />
         <variable name="APP_NAME" value="fs-counting" />
     </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.1">
+        <variable name="REVERSED_CLIENT_ID" value="830297659502-45fjuqjamdfpa8u0hbe8dtbi51mbkd77.apps.googleusercontent.com" />
+    </plugin>
     <engine name="android" spec="7.0.0" />
 </widget>

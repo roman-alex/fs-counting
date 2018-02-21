@@ -6,6 +6,7 @@ import * as firebase from 'firebase/app';
 
 import { Platform } from 'ionic-angular';
 import { Facebook } from '@ionic-native/facebook';
+import {GooglePlus} from "@ionic-native/google-plus";
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ export class WelcomePage {
 
   displayName;
 
-  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private fb: Facebook, private platform: Platform, public menu: MenuController) {
+  constructor(public navCtrl: NavController, private afAuth: AngularFireAuth, private fb: Facebook, private platform: Platform, public menu: MenuController, private googlePlus: GooglePlus) {
     this.afAuth.authState.subscribe((user: firebase.User) => {
       if (!user) {
         this.displayName = null;
@@ -26,7 +27,7 @@ export class WelcomePage {
     });
   }
 
-  login() {
+  loginFacebook() {
     if (this.platform.is('cordova')) {
       return this.fb.login(['email', 'public_profile']).then(res => {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
@@ -38,6 +39,17 @@ export class WelcomePage {
         .signInWithPopup(new firebase.auth.FacebookAuthProvider())
         .then(res => console.log(res));
     }
+  }
+
+  loginGoogle() {
+    this.googlePlus.login({
+      'webClientId': '830297659502-45fjuqjamdfpa8u0hbe8dtbi51mbkd77.apps.googleusercontent.com'
+    })
+      .then(res => {
+        const firecreds = firebase.auth.GoogleAuthProvider.credential(res.idToken);
+        return firebase.auth().signInWithCredential(firecreds);
+      })
+      .catch(err => console.error(err));
   }
 
   ionViewDidEnter() {

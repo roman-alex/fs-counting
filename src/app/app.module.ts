@@ -11,6 +11,7 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {Facebook} from "@ionic-native/facebook";
 import {AngularFirestore} from "angularfire2/firestore";
+import {GooglePlus} from "@ionic-native/google-plus";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyABUgtvcgM7My8m6MeIfFrigHuUkiZZiVQ",
@@ -40,6 +41,7 @@ export const firebaseConfig = {
     SplashScreen,
     StatusBar,
     Facebook,
+    GooglePlus,
     AngularFirestore
   ]
 })
